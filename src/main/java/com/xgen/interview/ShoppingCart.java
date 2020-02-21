@@ -1,5 +1,6 @@
 package com.xgen.interview;
 
+
 import java.lang.reflect.Array;
 import java.util.*;
 
@@ -9,13 +10,30 @@ import java.util.*;
  * Please write a replacement
  */
 public class ShoppingCart implements IShoppingCart {
-    HashMap<String, Integer> contents = new HashMap<>();
+    TreeMap<String, Integer> contents = new TreeMap<>(); // treemap to display items in order of purchase
     Pricer pricer;
+    Receipt receipt;
+    boolean priceFirst;
 
-    public ShoppingCart(Pricer pricer) {
+    public ShoppingCart(Pricer pricer, boolean priceFirst) {
         this.pricer = pricer;
+        this.priceFirst = priceFirst;
     }
 
+    public boolean isPriceFirst() {
+        return priceFirst;
+    }
+
+    public void setPriceFirst(boolean priceFirst) {
+        this.priceFirst = priceFirst;
+    }
+
+    /**
+     * Add the item to the basket. Check to see if the item is in the basket
+     * already and if so, update it's total instead.
+     * @param itemType - The item being scanned by the hardware
+     * @param number - The amount of the item being purchased
+     */
     public void addItem(String itemType, int number) {
         if (!contents.containsKey(itemType)) {
             contents.put(itemType, number);
@@ -25,15 +43,50 @@ public class ShoppingCart implements IShoppingCart {
         }
     }
 
-    public void printReceipt() {
-        Object[] keys = contents.keySet().toArray();
+    /**
+     * Reset the shopping cart to an empty state.
+     */
+    public void emptyCart() {
+        contents = new TreeMap<>();
+    }
 
-        for (int i = 0; i < Array.getLength(keys) ; i++) {
-            Integer price = pricer.getPrice((String)keys[i]) * contents.get(keys[i]);
-            Float priceFloat = new Float(new Float(price) / 100);
-            String priceString = String.format("€%.2f", priceFloat);
+    /**
+     * Calculate the total price of an item.
+     * @param item item to calculate the price of
+     * @return price of item in flot format
+     */
+    public float getTotalItemPrice(String item) {
+        Integer price = pricer.getPrice(item) * contents.get(item);
+        Float priceFloat = (float) price / 100;
+        return priceFloat;
+    }
 
-            System.out.println(keys[i] + " - " + contents.get(keys[i]) + " - " + priceString);
+    /**
+     * Generate a receipt of all the items in the shopping cart. Goes
+     * through all the items in the basket, calculates each items total and
+     * stores it in a @ReceiptItem object which is then added to the @Receipt
+     * object.
+     */
+    private void generateReceipt() {
+        receipt = new Receipt(priceFirst);
+        ReceiptItem receiptItem;
+        for (Map.Entry<String, Integer> purchase : contents.entrySet()) {
+            String key = purchase.getKey();
+            Integer value = purchase.getValue();
+            Float priceFloat = getTotalItemPrice(key);
+            receiptItem = new ReceiptItem(key, value, priceFloat);
+            receipt.addItem(receiptItem);
         }
     }
+
+    /**
+     * Call a method to generate and then print a receipt containing all the
+     * items in the shopping cart.
+     */
+    public void printReceipt() {
+        generateReceipt();
+        System.out.println(receipt.toString());
+    }
+
+
 }
