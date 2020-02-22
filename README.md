@@ -6,8 +6,11 @@ The goal of the software is to record items as they're swiped through a supermar
 
 Please note; there are no intentional tricks/traps in this project. Please work-around any bugs you discover & note them for the discussion during the onsite.
 
+- This project was ran and tested on intellij
+
 ## Dependencies
   gradle (https://gradle.org/install)
+  - The dependencies have not changed from the initial code
 
 ## Build
   gradle build
