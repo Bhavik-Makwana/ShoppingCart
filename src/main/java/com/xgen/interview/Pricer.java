@@ -17,6 +17,8 @@ public class Pricer {
     /**
      * Returns the price of the item passed, in Euro-cent. Eg. if an item costs €1, this will return 100
      * If itemType is an unknown string, store policy is that the item is free.
+     * @param itemType item to get price of
+     * @return items price in Euro-cent
      */
     public Integer getPrice(String itemType) {
         if (!pricingDatabase.containsKey(itemType)) {

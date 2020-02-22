@@ -6,12 +6,27 @@ The goal of the software is to record items as they're swiped through a supermar
 
 Please note; there are no intentional tricks/traps in this project. Please work-around any bugs you discover & note them for the discussion during the onsite.
 
+- This project was ran and tested on intellij
+
 ## Dependencies
   gradle (https://gradle.org/install)
+  - The dependencies have not changed from the initial code
 
 ## Build
   gradle build
 
 ## Test
   gradle test
-# ShoppingCart
+
+## Patch Notes
+- Added a Receipt Object
+- Added a ReceiptItem Object to easily add/remove attributes associated with items in a receipt
+- Tests made more flexible, reducing the amount of redundant code so less changes have to be made to the tests on a change to the codebase
+- Test coverage is now 100% methods and 100% LoC
+- Boolean parameter added to ShoppingCart constructor to set whether receipt should display price or not
+- IShoppingCart left untouched
+- Total line displays at bottom of receipt
+- Updated receipt layout
+- Receipt layout more flexible with ability to change column withds on change of columnWidth attribute in RecieptObject
+- Added JavaDocs to each non getter/setter method
+- Added helper methods to ShoppingCart to make more rounded and usable
