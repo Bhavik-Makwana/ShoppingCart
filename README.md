@@ -17,4 +17,3 @@ Please note; there are no intentional tricks/traps in this project. Please work-
 
 ## Test
   gradle test
-# ShoppingCart
