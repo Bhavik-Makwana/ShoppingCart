@@ -28,14 +28,14 @@ public class ShoppingCart implements IShoppingCart {
         this.priceFirst = priceFirst;
     }
 
-//    public static void main(String[] args) {
-//        Pricer p = new Pricer();
-//        ShoppingCart cart = new ShoppingCart(p, false);
+    public static void main(String[] args) {
+        Pricer p = new Pricer();
+        ShoppingCart cart = new ShoppingCart(p, false);
 //        cart.addItem("apple", 20);
 //        cart.addItem("apple", 10);
 //        cart.addItem("banana", 20);
-//        cart.printReceipt();
-//    }
+        cart.printReceipt();
+    }
 
     /**
      * Add the item to the basket. Check to see if the item is in the basket

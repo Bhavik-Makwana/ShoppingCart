@@ -108,6 +108,19 @@ public class ShoppingCartTest {
     }
 
     @Test
+    public void receiptPrintsAsExpectedWhenEmpty() {
+        sc.emptyCart();
+        sc.setPriceFirst(false);
+        final ByteArrayOutputStream myOut = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(myOut));
+
+        sc.printReceipt();
+        assertEquals(String.format("      Item  Quantity     Price\n" +
+                "------------------------------\n" +
+                "               Total €0.00\n"), myOut.toString());
+    }
+
+    @Test
     public void canPriceFirstBeToggledCorrectly() {
         sc.emptyCart();
         sc.setPriceFirst(true);
