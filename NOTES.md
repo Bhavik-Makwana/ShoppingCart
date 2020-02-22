@@ -11,5 +11,5 @@
 
 ## Patch process
 - Demonstration purposes, merge dev branch to master after all tests pass
-![Patch screenshot](https://github.com/Bhavik-Makwana/ShoppingCart/edit/master/images/merge.png "Patch Example")
+![Patch screenshot](https://github.com/Bhavik-Makwana/ShoppingCart/blob/master/images/merge.png "Patch Example")
 
